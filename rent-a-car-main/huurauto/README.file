@@ -1,0 +1,61 @@
+
+
+HI OSMAN DIT IS DE OPDRACHT IK BEN ER EIGENLIJK NOG ER MEE BEZIG IK MOET ZEGGEN DIT OPDRACHT TOT NU TOE IS 
+HOOFD PIJN MAAR LEUK HEB NIEUWE DINGEN GELEERD MAAR. ADMIN IS NOG STEEDS TE LASTIG VOOR MIJ MET MAAR KRIJG 
+HET BEETJE ONDER DE KNEE HOOP IK 
+
+BELARIJKE DINGEN TE WETEN   
+
+-- admin acount is  email = qaz@gmail.com / wachtwoord = 1234 
+wat het nu kan doen de gebruikers hun gegevens wijzigen alleen er gaat iets fout met de wachtwoord maar in mijn database krijg wel dat gegevens ik zit er mee debuggen momenteel het beste is gewoon  alleen als admin gebruiken  
+
+--foto uploaden is gelukt  ik heb geregeld dat je via een form dat all gegevens kan zetten van een auto en de foto 
+en het stuur naar de admin pagina waarvan je uit eindelijk kan editen  moet nog weten hoe ik het weg kan halen zonder dat het  verwijderd woord   
+
+
+
+ja dit was het ongeveer ik ga dit website zelf verder nog afmaken 
+
+
+ik weet niet of mijn sql binnen komt maar ik zet het gewoon hier ook neer
+
+
+create database huurautos;
+use huurautos;
+
+create table gebruikers(
+gebruikers_id int auto_increment,
+naam varchar (255) ,
+email varchar (255),
+wachtwoord varchar (255)  ,
+primary key(gebruikers_id)
+);
+
+ALTER TABLE gebruikers
+MODIFY COLUMN role ENUM('admin', 'user', 'medewerker');
+
+create table autos(
+auto_id int auto_increment,
+foto varchar (255),
+kenteken varchar (255),
+autonaam varchar (255) ,
+bouwjaar date,
+huurprijs int,
+primary key(auto_id)
+);
+
+
+ALTER TABLE autos
+ADD COLUMN beschrijving varchar (255);
+select * from autos;
+create table reseveringen(
+    resevering_id int auto_increment,
+    gebruikers_id int, 
+    begindatum date,
+    stopdatum date,
+    volleprijs int,
+    auto_id int,
+    FOREIGN KEY (gebruikers_id) REFERENCES gebruikers(gebruikers_id),
+    FOREIGN KEY (auto_id) REFERENCES autos(auto_id),
+    primary key (resevering_id)
+);
